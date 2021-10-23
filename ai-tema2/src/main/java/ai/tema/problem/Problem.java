@@ -1,5 +1,6 @@
 package ai.tema.problem;
 
+import ai.tema.constraint.Constraint;
 import ai.tema.entities.Colours;
 import ai.tema.entities.Region;
 
@@ -58,6 +59,12 @@ public class Problem {
                 if (visited.get(region1) == null || !visited.get(region1)) {
                     queue.add(region1);
                 }
+            }
+        }
+        for (Region region1 : regions) {
+            if (!Constraint.verifyConstraint(region1)) {
+                System.out.println(ANSI_RED + "Constrangerea nu e satisfacuta!!!" + ANSI_RESET);
+                return;
             }
         }
         for (Region region : regions) {

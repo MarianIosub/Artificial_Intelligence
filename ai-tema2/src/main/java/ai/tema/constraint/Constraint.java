@@ -4,10 +4,15 @@ import ai.tema.entities.Region;
 
 public class Constraint {
 
-    private static boolean verifyConstraint(Region region1, Region region2) {
-        if (!region1.getAdjacentRegions().contains(region2)) {
-            return true;
+    public static boolean verifyConstraint(Region region1) {
+        if (region1.getChosenColour() == null) {
+            return false;
         }
-        return !region1.getChosenColour().equals(region2.getChosenColour());
+        for (Region region : region1.getAdjacentRegions()) {
+            if (region.getChosenColour().equals(region1.getChosenColour())) {
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -51,7 +51,11 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Problem problem = new Problem(exemple1());
+        System.out.println("Exemplu 1:");
+        Problem problem = new Problem(exemple2());
         problem.resolve();
+        System.out.println("\nExemplu 2:");
+        Problem problem1 = new Problem(exemple1());
+        problem1.resolve();
     }
 }

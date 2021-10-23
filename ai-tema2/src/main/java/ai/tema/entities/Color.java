@@ -1,5 +1,5 @@
 package ai.tema.entities;
 
-public enum Colours {
+public enum Color {
     RED, GREEN, BLUE
 }

@@ -1,4 +1,4 @@
-import ai.tema.entities.Colours;
+import ai.tema.entities.Color;
 import ai.tema.entities.Region;
 import ai.tema.problem.Problem;
 
@@ -8,38 +8,41 @@ import java.util.Collections;
 import java.util.List;
 
 public class Main {
-    public static List<Colours> createColoursList(Colours a, Colours b, Colours c) {
-        List<Colours> colours = new ArrayList<>();
+    public static List<Color> createColorsList(Color a, Color b, Color c) {
+        List<Color> colors = new ArrayList<>();
         if (a != null) {
-            colours.add(a);
+            colors.add(a);
         }
         if (b != null) {
-            colours.add(b);
+            colors.add(b);
         }
         if (c != null) {
-            colours.add(c);
+            colors.add(c);
         }
-        return colours;
+        return colors;
     }
 
     public static List<Region> exemple1() {
-        Region WA = new Region("WA", createColoursList(Colours.RED, Colours.BLUE, Colours.BLUE));
-        Region SA = new Region("SA", createColoursList(Colours.GREEN, Colours.RED, null));
-        Region NT = new Region("NT", createColoursList(Colours.GREEN, null, null));
+        Region WA = new Region("WA", createColorsList(Color.RED, Color.BLUE, Color.BLUE));
+        Region SA = new Region("SA", createColorsList(Color.GREEN, Color.RED, null));
+        Region NT = new Region("NT", createColorsList(Color.GREEN, null, null));
+
         WA.setAdjacentRegions(Arrays.asList(SA, NT));
         SA.setAdjacentRegions(Arrays.asList(WA, NT));
         NT.setAdjacentRegions(Arrays.asList(SA, WA));
+
         return Arrays.asList(WA, SA, NT);
     }
 
     public static List<Region> exemple2() {
-        Region WA = new Region("WA", createColoursList(Colours.RED, null, null));
-        Region SA = new Region("SA", createColoursList(Colours.GREEN, Colours.RED, Colours.BLUE));
-        Region NT = new Region("NT", createColoursList(Colours.GREEN, Colours.BLUE, Colours.RED));
-        Region Q = new Region("Q", createColoursList(Colours.GREEN, null, null));
-        Region NSW = new Region("Q", createColoursList(Colours.GREEN, Colours.BLUE, Colours.RED));
-        Region V = new Region("V", createColoursList(Colours.GREEN, Colours.BLUE, Colours.RED));
-        Region T = new Region("T", createColoursList(Colours.GREEN, Colours.BLUE, Colours.RED));
+        Region WA = new Region("WA", createColorsList(Color.RED, null, null));
+        Region SA = new Region("SA", createColorsList(Color.GREEN, Color.RED, Color.BLUE));
+        Region NT = new Region("NT", createColorsList(Color.GREEN, Color.BLUE, Color.RED));
+        Region Q = new Region("Q", createColorsList(Color.GREEN, null, null));
+        Region NSW = new Region("Q", createColorsList(Color.GREEN, Color.BLUE, Color.RED));
+        Region V = new Region("V", createColorsList(Color.GREEN, Color.BLUE, Color.RED));
+        Region T = new Region("T", createColorsList(Color.GREEN, Color.BLUE, Color.RED));
+
         WA.setAdjacentRegions(Arrays.asList(SA, NT));
         SA.setAdjacentRegions(Arrays.asList(WA, NT, Q, NSW, V));
         NT.setAdjacentRegions(Arrays.asList(SA, WA, Q));
@@ -47,15 +50,17 @@ public class Main {
         Q.setAdjacentRegions(Arrays.asList(SA, NT, NSW));
         NSW.setAdjacentRegions(Arrays.asList(SA, V, Q));
         V.setAdjacentRegions(Arrays.asList(SA, NSW, T));
+
         return Arrays.asList(WA, SA, NT, Q, NSW, V, T);
     }
 
     public static void main(String[] args) {
-        System.out.println("Exemplu 1:");
-        Problem problem = new Problem(exemple2());
+        System.out.println("Exemplul 1:");
+        Problem problem = new Problem(exemple1());
         problem.resolve();
-        System.out.println("\nExemplu 2:");
-        Problem problem1 = new Problem(exemple1());
+        
+        System.out.println("\nExemplul 2:");
+        Problem problem1 = new Problem(exemple2());
         problem1.resolve();
     }
 }

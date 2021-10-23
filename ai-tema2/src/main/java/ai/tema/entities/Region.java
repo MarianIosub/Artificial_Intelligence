@@ -3,7 +3,7 @@ package ai.tema.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Region {
+public class Region implements Comparable<Region> {
     private String name;
     private List<Colours> domain;
     private Colours chosenColour;
@@ -14,6 +14,10 @@ public class Region {
         this.domain = domain;
         this.chosenColour = null;
         this.adjacentRegions = new ArrayList<>();
+    }
+
+    public Region() {
+
     }
 
     public String getName() {
@@ -44,7 +48,30 @@ public class Region {
         return adjacentRegions;
     }
 
+    public void extractColor(Colours chosenColour) {
+        if (domain.contains(chosenColour)) {
+            this.domain.remove(chosenColour);
+        }
+    }
+
+    public void addColour(Colours colours) {
+        domain.add(colours);
+    }
+
     public void setAdjacentRegions(List<Region> adjacentRegions) {
         this.adjacentRegions = adjacentRegions;
+    }
+
+    @Override
+    public String toString() {
+        return "Region{" +
+                "name='" + name + '\'' +
+                ", chosenColour=" + chosenColour +
+                '}';
+    }
+
+    @Override
+    public int compareTo(Region o) {
+        return Integer.compare(this.getDomain().size(), o.getDomain().size());
     }
 }

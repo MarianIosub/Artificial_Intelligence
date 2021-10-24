@@ -49,7 +49,7 @@ public class Problem {
         Color assignedColor = region.getDomain().get(index);
 
         while (index < region.getDomain().size()) {
-            if (Constraint.adjactentRegionsCanBeColoredAfterActualRegionIsColored(region, assignedColor)) {
+            if (Constraint.adjacentRegionsCanBeColoredAfterActualRegionIsColored(region, assignedColor)) {
                 break;
             }
             index++;

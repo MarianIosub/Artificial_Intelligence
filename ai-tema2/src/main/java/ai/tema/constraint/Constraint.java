@@ -35,7 +35,7 @@ public class Constraint {
      * @param colours Culoarea cu care aceasta va fi colorata.
      * @return true, daca constrangerea este satisfacuta; false, atlfel.
      */
-    public static boolean adjactentRegionsCanBeColoredAfterActualRegionIsColored(Region region, Color colours) {
+    public static boolean adjacentRegionsCanBeColoredAfterActualRegionIsColored(Region region, Color colours) {
         for (Region neighbour : region.getAdjacentRegions()) {
             if (neighbour.getChosenColor() == null) {
                 List<Color> colours1 = new ArrayList<>(neighbour.getDomain());

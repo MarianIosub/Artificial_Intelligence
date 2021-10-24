@@ -22,7 +22,7 @@ public class Main {
         return colors;
     }
 
-    public static List<Region> exemple1() {
+    public static List<Region> example1() {
         Region WA = new Region("WA", createColorsList(Color.RED, Color.BLUE, Color.BLUE));
         Region SA = new Region("SA", createColorsList(Color.GREEN, Color.RED, null));
         Region NT = new Region("NT", createColorsList(Color.GREEN, null, null));
@@ -34,12 +34,12 @@ public class Main {
         return Arrays.asList(WA, SA, NT);
     }
 
-    public static List<Region> exemple2() {
+    public static List<Region> example2() {
         Region WA = new Region("WA", createColorsList(Color.RED, null, null));
         Region SA = new Region("SA", createColorsList(Color.GREEN, Color.RED, Color.BLUE));
         Region NT = new Region("NT", createColorsList(Color.GREEN, Color.BLUE, Color.RED));
         Region Q = new Region("Q", createColorsList(Color.GREEN, null, null));
-        Region NSW = new Region("Q", createColorsList(Color.GREEN, Color.BLUE, Color.RED));
+        Region NSW = new Region("NSW", createColorsList(Color.GREEN, Color.BLUE, Color.RED));
         Region V = new Region("V", createColorsList(Color.GREEN, Color.BLUE, Color.RED));
         Region T = new Region("T", createColorsList(Color.GREEN, Color.BLUE, Color.RED));
 
@@ -56,11 +56,11 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Exemplul 1:");
-        Problem problem = new Problem(exemple1());
+        Problem problem = new Problem(example1());
         problem.resolve();
         
         System.out.println("\nExemplul 2:");
-        Problem problem1 = new Problem(exemple2());
+        Problem problem1 = new Problem(example2());
         problem1.resolve();
     }
 }

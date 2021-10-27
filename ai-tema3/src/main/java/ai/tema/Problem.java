@@ -4,6 +4,7 @@ import ai.tema.constraint.Constraint;
 import ai.tema.constraint.InputFormatter;
 import ai.tema.entities.State;
 import ai.tema.state.StateUtils;
+import lombok.SneakyThrows;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -27,45 +28,34 @@ public class Problem {
 
     /**
      * Compara secventa de culori aleasa de jucatorul A cu secventa de culori ghicita de jucatorul B.
+     *
      * @return Numarul de pozitii in care cele doua secvente au aceeasi valoare (aceeasi culoare).
      */
-    private int compareSequencesFromState() {
-        int numberOfGuessedColors = 0;
-        List<Integer> guessedColors = actualState.getGuessedColorSequence();
-        List<Integer> chosenColors = actualState.getChosenColorSequence();
 
-        for (int i = 0; i < chosenColors.size(); i++) {
-            if (guessedColors.get(i).equals(chosenColors.get(i))) {
-                numberOfGuessedColors++;
-            }
-        }
 
-        return numberOfGuessedColors;
-    }
-
+    @SneakyThrows
     public void resolve() {
         System.out.println(actualState.getChosenColorSequence());
 
         Scanner scanner = new Scanner(System.in);
 
-        while(StateUtils.isFinalState(actualState) == null) {
+        while (StateUtils.isFinalState(actualState) == null) {
             System.out.println("Introduceti secventa de culori");
             System.out.print(" >> ");
             String colorSequenceLine = scanner.nextLine();
             List<Integer> colorSequence = null;
             try {
                 colorSequence = InputFormatter.formatInputLine(colorSequenceLine);
-            }
-            catch(NumberFormatException exception) {
+            } catch (NumberFormatException exception) {
                 System.out.println("Secventa de culori este invalida!");
                 continue;
             }
 
-            while(colorSequence.size() != k || !Constraint.verifyMConstraint(colorSequence, m, null)) {
+            while (colorSequence.size() != k || !Constraint.verifyMConstraint(colorSequence, m, null) || !Constraint.verifyNConstraint(colorSequence, n)) {
                 System.out.printf(
                         "Secventa de culori trebuie sa aiba dimensiunea %d si fiecare culoare trebuie sa " +
-                                "apara de cel mult %d ori.%n",
-                        k, m
+                                "apara de cel mult %d ori.Culorile pot fi pana la %d.%n",
+                        k, m, n
                 );
 
                 System.out.println("Introduceti secventa de culori");
@@ -73,8 +63,7 @@ public class Problem {
                 colorSequenceLine = scanner.nextLine();
                 try {
                     colorSequence = InputFormatter.formatInputLine(colorSequenceLine);
-                }
-                catch(NumberFormatException exception) {
+                } catch (NumberFormatException exception) {
                     System.out.println("Secventa de culori este invalida!");
                     continue;
                 }
@@ -88,8 +77,10 @@ public class Problem {
                     actualState.getN()
             );
 
-            if(StateUtils.isFinalState(actualState) == null) {
-                System.out.printf("Ai ghicit %d culori.%n", compareSequencesFromState());
+            if (StateUtils.isFinalState(actualState) == null) {
+                System.out.printf("Ai ghicit %d culori.%n", StateUtils.compareSequencesFromState(actualState));
+                Thread.sleep(1500);
+                System.out.println("\n\n\n" + StateUtils.printStatesTillActual(actualState));
             }
         }
 

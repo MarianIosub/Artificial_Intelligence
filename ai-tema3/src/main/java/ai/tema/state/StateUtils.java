@@ -10,6 +10,7 @@ import java.util.Random;
 public class StateUtils {
     /**
      * Genereaza o secventa de culori aleatoare.
+     *
      * @param n Numarul de culori.
      * @param m Numarul maxim de aparitii pe care o culoare il poate avea.
      * @param k Dimensiunea secventei de culori.
@@ -33,6 +34,7 @@ public class StateUtils {
 
     /**
      * Creeaza starea initiala.
+     *
      * @param n Numarul de culori.
      * @param m Numarul maxim de aparitii pe care o culoare il poate avea.
      * @param k Dimensiunea secventei de culori.
@@ -59,6 +61,7 @@ public class StateUtils {
 
     /**
      * Verifica daca o stare este stare finala.
+     *
      * @param state Starea pentru care se face verificarea.
      * @return <b>A</b>, daca starea este finala si a castigat jucatorul A; <b>B</b>, daca starea este finala si
      * a castigat jucatorul B; <b>null</b>, daca starea nu este finala
@@ -73,5 +76,29 @@ public class StateUtils {
         }
 
         return null;
+    }
+
+    public static String printStatesTillActual(State state) {
+        StringBuilder stringBuilder = new StringBuilder();
+        State actualState = state;
+        while (actualState.getSteps() != 0) {
+            stringBuilder.append(actualState);
+            actualState = actualState.getParent();
+        }
+        return stringBuilder.toString();
+    }
+
+    public static int compareSequencesFromState(State state1) {
+        int numberOfGuessedColors = 0;
+        List<Integer> guessedColors = state1.getGuessedColorSequence();
+        List<Integer> chosenColors = state1.getChosenColorSequence();
+
+        for (int i = 0; i < chosenColors.size(); i++) {
+            if (guessedColors.get(i).equals(chosenColors.get(i))) {
+                numberOfGuessedColors++;
+            }
+        }
+
+        return numberOfGuessedColors;
     }
 }

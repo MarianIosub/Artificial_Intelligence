@@ -1,5 +1,6 @@
 package ai.tema.entities;
 
+import ai.tema.state.StateUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,5 +34,11 @@ public class State {
 
     public void incrementSteps() {
         steps++;
+    }
+
+    @Override
+    public String toString() {
+        return guessedColorSequence + "   ->>Step: " + steps + "  ->>Steps remained: " + (n * 2 - steps) + "  ->>Here you guessed: " + StateUtils.compareSequencesFromState(this) +
+                '\n';
     }
 }

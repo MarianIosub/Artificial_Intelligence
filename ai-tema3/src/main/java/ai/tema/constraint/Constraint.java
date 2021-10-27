@@ -10,15 +10,16 @@ public class Constraint {
     /**
      * Verifica daca urmatoarea constrangere este satisfacuta: o culoare poate aparea in secventa de cel mult
      * m ori.
+     *
      * @param colorSequence Secventa de culori in care se face verificarea.
-     * @param m Numarul maxim de aparitii pe care culoare o poate avea.
-     * @param chosenColor Culoarea pentru care se face verificarea.
+     * @param m             Numarul maxim de aparitii pe care culoare o poate avea.
+     * @param chosenColor   Culoarea pentru care se face verificarea.
      * @return true, daca constrangerea este satisfacuta; false, altfel.
      */
     public static boolean verifyMConstraint(List<Integer> colorSequence,
                                             int m,
                                             Integer chosenColor) {
-        if(chosenColor != null) {
+        if (chosenColor != null) {
             List<Integer> colorAppearances = colorSequence.stream()
                     .filter(color -> Objects.equals(color, chosenColor))
                     .collect(Collectors.toList());
@@ -27,16 +28,25 @@ public class Constraint {
         }
 
         Map<Integer, Integer> mapOfColors = new HashMap<>();
-        for(Integer color : colorSequence) {
+        for (Integer color : colorSequence) {
             mapOfColors.merge(color, 1, Integer::sum);
         }
 
-        for(Integer color : mapOfColors.keySet()) {
-            if(mapOfColors.get(color).compareTo(m) > 0) {
+        for (Integer color : mapOfColors.keySet()) {
+            if (mapOfColors.get(color).compareTo(m) > 0) {
                 return false;
             }
         }
 
+        return true;
+    }
+
+    public static boolean verifyNConstraint(List<Integer> colorSequence, int n) {
+        for (int color : colorSequence) {
+            if (color > n) {
+                return false;
+            }
+        }
         return true;
     }
 }

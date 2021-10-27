@@ -32,10 +32,6 @@ public class State {
 
     private int n;
 
-    public void incrementSteps() {
-        steps++;
-    }
-
     @Override
     public String toString() {
         return guessedColorSequence + "   ->>Step: " + steps + "  ->>Steps remained: " + (n * 2 - steps) + "  ->>Here you guessed: " + StateUtils.compareSequencesFromState(this) +

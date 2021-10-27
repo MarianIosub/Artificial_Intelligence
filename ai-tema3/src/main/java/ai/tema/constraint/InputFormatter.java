@@ -12,7 +12,7 @@ public class InputFormatter {
      */
     public static List<Integer> formatInputLine(String line) throws NumberFormatException {
         line = line.trim();
-        List<String> colorSequenceAsString = List.of(line.split(","));
+        List<String> colorSequenceAsString = List.of(line.split(" "));
 
         return colorSequenceAsString.stream()
                 .map(Integer::valueOf)

@@ -78,6 +78,12 @@ public class StateUtils {
         return null;
     }
 
+    /**
+     * Returneaza toate starile de la starea initiala pana la cea data ca parametru
+     *
+     * @param state Starea pentru care se aplica functia
+     * @return : Toate starile de la cea initiala pana la cea data ca parametru sub forma unui singur <b>String</b>
+     */
     public static String printStatesTillActual(State state) {
         StringBuilder stringBuilder = new StringBuilder();
         State actualState = state;
@@ -88,6 +94,11 @@ public class StateUtils {
         return stringBuilder.toString();
     }
 
+    /**
+     * Compara secventa de culori aleasa de jucatorul A cu secventa de culori ghicita de jucatorul B.
+     *
+     * @return Numarul de pozitii in care cele doua secvente au aceeasi valoare (aceeasi culoare).
+     */
     public static int compareSequencesFromState(State state1) {
         int numberOfGuessedColors = 0;
         List<Integer> guessedColors = state1.getGuessedColorSequence();

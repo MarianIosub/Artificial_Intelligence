@@ -1,8 +1,8 @@
-import ai.tema.Problem;
+import ai.tema.Game;
 
 public class Main {
     public static void main(String[] args) {
-        Problem problem = new Problem(8, 1, 4);
-        problem.resolve();
+        Game game = new Game(8, 1, 4);
+        game.play();
     }
 }

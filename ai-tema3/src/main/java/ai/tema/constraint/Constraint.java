@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Constraint {
+
     /**
      * Verifica daca urmatoarea constrangere este satisfacuta: o culoare poate aparea in secventa de cel mult
      * m ori.
@@ -41,6 +42,14 @@ public class Constraint {
         return true;
     }
 
+    /**
+     * Verifica daca urmatoarea constrangere este satisfacuta: toate culorile <b>(numerele)</b> introduse trebuie
+     * sa existe in joc
+     *
+     * @param colorSequence Secventa de culori in care se face verificarea.
+     * @param n             Numarul maxim <b>(ce reprezinta culoarea)</b> care ar putea fi ales
+     * @return <b>true</b>, daca constrangerea este satisfacuta; <b>false</b>, altfel.
+     */
     public static boolean verifyNConstraint(List<Integer> colorSequence, int n) {
         for (int color : colorSequence) {
             if (color > n) {

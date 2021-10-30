@@ -1,4 +1,4 @@
-package ai.tema.constraint;
+package ai.tema.utils;
 
 import java.util.List;
 import java.util.stream.Collectors;

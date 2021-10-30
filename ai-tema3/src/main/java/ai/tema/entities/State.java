@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import java.util.List;
 
+import static ai.tema.utils.Colors.*;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -34,7 +36,9 @@ public class State {
 
     @Override
     public String toString() {
-        return guessedColorSequence + "   ->>Step: " + steps + "  ->>Steps remained: " + (n * 2 - steps) + "  ->>Here you guessed: " + StateUtils.compareSequencesFromState(this) +
-                '\n';
+        return CONSOLE_COLOR_GREEN + guessedColorSequence + CONSOLE_COLOR_BLUE + "   ->>Step: " + steps +
+                CONSOLE_COLOR_GREEN + "  ->>Steps remained: " + (n * 2 - steps) + CONSOLE_COLOR_RED +
+                "  ->>Here you guessed: " + StateUtils.compareSequencesFromState(this) +
+                '\n' + CONSOLE_COLOR_RESET;
     }
 }

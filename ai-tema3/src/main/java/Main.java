@@ -1,8 +1,7 @@
-import ai.tema.Game;
+import ai.tema.ui.Game;
 
 public class Main {
     public static void main(String[] args) {
-        Game game = new Game(8, 1, 4);
-        game.play();
+        new Game(8, 1, 4).play();
     }
 }

@@ -16,7 +16,7 @@ public class StateUtils {
      * @param k Dimensiunea secventei de culori.
      * @return Secventa generata.
      */
-    private static List<Integer> chooseColorSequence(int n, int m, int k) {
+    public static List<Integer> chooseColorSequence(int n, int m, int k) {
         List<Integer> colorSequence = new ArrayList<>();
         Random random = new Random();
 

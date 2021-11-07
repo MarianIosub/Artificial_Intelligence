@@ -223,7 +223,7 @@ public class GameMiniMax {
             colorSequence = null;
         }
 
-        System.out.printf(CONSOLE_COLOR_RED + "\n\n\n>>>>>>>>>   A castigat jucatorul %s    <<<<<<<<<<<%n" + CONSOLE_COLOR_RESET,
+        System.out.printf(CONSOLE_COLOR_RED + "\n\n\n>>>>>>>>>     A castigat jucatorul %s      <<<<<<<<<<<%n" + CONSOLE_COLOR_RESET,
                 StateUtils.isFinalState(actualState));
         System.out.println(CONSOLE_COLOR_RED + ">>>>>>>>>   Secventa era: " + actualState.getChosenColorSequence() +
                 "    <<<<<<<<<<<" + CONSOLE_COLOR_RESET);

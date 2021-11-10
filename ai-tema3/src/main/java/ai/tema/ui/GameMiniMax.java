@@ -33,6 +33,9 @@ public class GameMiniMax {
      */
     private final int k;
 
+    /**
+     * Lista combinatiilor de culori care pot fi alese la pasul actual
+     */
     private List<List<Integer>> combinations;
 
     private State actualState;
@@ -57,6 +60,7 @@ public class GameMiniMax {
 
     /**
      * Alege cea mai buna secventa de culori de la pasul actual.
+     *
      * @return Secventa de culori aleasa.
      */
     private ColorSequence getBestColorSequenceMiniMax() {
@@ -75,7 +79,7 @@ public class GameMiniMax {
         }
 
         // Nu am gasit nicio combinatie cu scor maxim => generez aleator una
-        if(bestSequenceScore == 0 ){
+        if (bestSequenceScore == 0) {
             Random random = new Random();
             return new ColorSequence(combinations.get(random.nextInt(combinations.size())));
         }
@@ -87,7 +91,7 @@ public class GameMiniMax {
      * Face pruning combinatiilor posibile de culori.
      */
     private void pruneCombinations() {
-        if(actualState.getSteps() >= 1) {
+        if (actualState.getSteps() >= 1) {
             State grandpa = actualState.getParent();
             int grandpaGuessedColors = StateUtils.compareSequencesFromState(grandpa);
             State parent = actualState;
@@ -95,15 +99,15 @@ public class GameMiniMax {
 
             // Numarul de culori modificate intre parinte si bunic
             int numberOfModifiedColors = 0;
-            for(int i=0; i<k; i++) {
-                if(!grandpa.getGuessedColorSequence().get(i).equals(parent.getGuessedColorSequence().get(i))) {
+            for (int i = 0; i < k; i++) {
+                if (!grandpa.getGuessedColorSequence().get(i).equals(parent.getGuessedColorSequence().get(i))) {
                     numberOfModifiedColors++;
                 }
             }
 
             // Parintele nu ghiceste nicio culoare
-            if(parentGuessedColors == 0) {
-                for(int i=0; i<k; i++) {
+            if (parentGuessedColors == 0) {
+                for (int i = 0; i < k; i++) {
                     int finalI = i;
                     combinations = combinations.stream()
                             .filter(combination -> !combination.get(finalI).equals(parent.getGuessedColorSequence().get(finalI)))
@@ -112,12 +116,12 @@ public class GameMiniMax {
             }
 
             // Parintele ghiceste acelasi numar de culori ca si bunicul
-            if(grandpaGuessedColors == parentGuessedColors) {
+            if (grandpaGuessedColors == parentGuessedColors) {
                 // O singura culoare a fost modificata intre secventele parintelui si a bunicului => niciuna din cele doua
                 //culori diferite nu este corecta
-                if(numberOfModifiedColors == 1) {
-                    for(int i=0; i<k; i++) {
-                        if(!grandpa.getGuessedColorSequence().get(i).equals(parent.getGuessedColorSequence().get(i))) {
+                if (numberOfModifiedColors == 1) {
+                    for (int i = 0; i < k; i++) {
+                        if (!grandpa.getGuessedColorSequence().get(i).equals(parent.getGuessedColorSequence().get(i))) {
                             int finalI = i;
                             combinations = combinations.stream()
                                     .filter(combination -> !combination.get(finalI).equals(parent.getGuessedColorSequence().get(finalI)) &&
@@ -129,12 +133,12 @@ public class GameMiniMax {
             }
 
             // Bunicul a ghicit mai multe culori decat parintele
-            if(grandpaGuessedColors > parentGuessedColors) {
+            if (grandpaGuessedColors > parentGuessedColors) {
                 // O singura culoare a fost modificata intre secventele parintelui si a bunicului => niciuna din cele doua
                 //culori diferite nu este corecta
-                if(numberOfModifiedColors == 1) {
-                    for(int i=0; i<k; i++) {
-                        if(!grandpa.getGuessedColorSequence().get(i).equals(parent.getGuessedColorSequence().get(i))) {
+                if (numberOfModifiedColors == 1) {
+                    for (int i = 0; i < k; i++) {
+                        if (!grandpa.getGuessedColorSequence().get(i).equals(parent.getGuessedColorSequence().get(i))) {
                             int finalI = i;
                             combinations = combinations.stream()
                                     .filter(combination -> combination.get(finalI).equals(grandpa.getGuessedColorSequence().get(finalI)))
@@ -145,12 +149,12 @@ public class GameMiniMax {
             }
 
             // Parintele a ghicit mai multe culori decat bunicul
-            if(grandpaGuessedColors < parentGuessedColors) {
+            if (grandpaGuessedColors < parentGuessedColors) {
                 // O singura culoare a fost modificata intre secventele parintelui si a bunicului => niciuna din cele doua
                 //culori diferite nu este corecta
-                if(numberOfModifiedColors == 1) {
-                    for(int i=0; i<k; i++) {
-                        if(!grandpa.getGuessedColorSequence().get(i).equals(parent.getGuessedColorSequence().get(i))) {
+                if (numberOfModifiedColors == 1) {
+                    for (int i = 0; i < k; i++) {
+                        if (!grandpa.getGuessedColorSequence().get(i).equals(parent.getGuessedColorSequence().get(i))) {
                             int finalI = i;
                             combinations = combinations.stream()
                                     .filter(combination -> combination.get(finalI).equals(parent.getGuessedColorSequence().get(finalI)))
@@ -166,6 +170,7 @@ public class GameMiniMax {
      * Calculeaza scorul produs de o secventa de culori. Scorul unei combinatii de culori este suma "aparitiilor" fiecarei
      * culori din combinatie. Aparitia unei culori este suma numarului culorilor ghicite din starile anterioare in care
      * apare acea culoare.
+     *
      * @param combination Combinatia pentru care se face calculul.
      * @return Scorul calculat.
      */
@@ -186,7 +191,7 @@ public class GameMiniMax {
         }
 
         Integer score = 0;
-        for(Integer value : combination) {
+        for (Integer value : combination) {
             score += apparitions.get(value - 1);
         }
         return score;
@@ -197,7 +202,7 @@ public class GameMiniMax {
         // Generez prima secventa de culori --> [1, 2, ..., k]
         ColorSequence colorSequence = new ColorSequence(
                 IntStream.rangeClosed(1, k)
-                .boxed().collect(Collectors.toList())
+                        .boxed().collect(Collectors.toList())
         );
 
         while (StateUtils.isFinalState(actualState) == null) {
@@ -214,12 +219,10 @@ public class GameMiniMax {
                     actualState.getN()
             );
 
-            if (StateUtils.isFinalState(actualState) == null) {
-                System.out.printf(CONSOLE_COLOR_GREEN + "Ai ghicit %d culori.%n" + CONSOLE_COLOR_RESET,
-                        StateUtils.compareSequencesFromState(actualState));
-                sleep(500);
-                System.out.println("\n".repeat(2 * n - actualState.getSteps()) + StateUtils.printStatesTillActual(actualState));
-            }
+            System.out.printf(CONSOLE_COLOR_GREEN + "Ai ghicit %d culori.%n" + CONSOLE_COLOR_RESET,
+                    StateUtils.compareSequencesFromState(actualState));
+            sleep(500);
+            System.out.println("\n".repeat(2 * n - actualState.getSteps()) + StateUtils.printStatesTillActual(actualState));
             colorSequence = null;
         }
 

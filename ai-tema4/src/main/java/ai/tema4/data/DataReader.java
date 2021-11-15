@@ -25,9 +25,9 @@ public class DataReader {
             String[] lineSplitted = line.split(",");
 
             instance = new Instance(
-                    Integer.valueOf(lineSplitted[0]),
-                    Integer.valueOf(lineSplitted[1]),
-                    Integer.valueOf(lineSplitted[2])
+                    Double.valueOf(lineSplitted[0]),
+                    Double.valueOf(lineSplitted[1]),
+                    Double.valueOf(lineSplitted[2])
             );
             content.add(instance);
         }

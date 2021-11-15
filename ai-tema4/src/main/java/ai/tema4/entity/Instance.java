@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Instance {
-    private Integer input1;
-    private Integer input2;
-    private Integer output;
+    private Double input1;
+    private Double input2;
+    private Double output;
 }

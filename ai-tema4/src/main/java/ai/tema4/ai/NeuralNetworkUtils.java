@@ -1,19 +1,17 @@
 package ai.tema4.ai;
 
-import ai.tema4.Main;
 import ai.tema4.ai.activation.SigmoidActivation;
 import ai.tema4.ai.entities.Edge;
 import ai.tema4.ai.entities.Neuron;
 import ai.tema4.ai.entities.NeuronalNetwork;
 import ai.tema4.entity.Instance;
-import ai.tema4.entity.Pair;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class NeuralNetworkUtils {
-    public static void train(NeuronalNetwork neuronalNetwork, List<Instance> instances) {
+    public static void train(NeuronalNetwork neuronalNetwork, List<Instance> instances, Double learningRate) {
         Map<Instance, Double> returnedValues = new HashMap<>();
 
         for (Instance instance : instances) {
@@ -64,7 +62,7 @@ public class NeuralNetworkUtils {
             }
 
             for(Edge edge: neuronalNetwork.getEdges()) {
-                edge.setValue(edge.getValue() - errors.get(edge) * Main.learningRate);
+                edge.setValue(edge.getValue() - errors.get(edge) * learningRate);
             }
         }
     }

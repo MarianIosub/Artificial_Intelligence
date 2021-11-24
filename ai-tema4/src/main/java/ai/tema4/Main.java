@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Random;
 
 public class Main {
-    private static int epochs = 200;
-    public static double learningRate = 0.7; // 0.7
+    private static final int epochs = 500;
+    public static double learningRate = 0.5; // 0.7
 
     private static void neuronalNetwork(List<Instance> instances) {
         Layer layer1 = new Layer(1, List.of(
@@ -33,13 +33,13 @@ public class Main {
 
         for (Neuron neuron : layer1.getNeurons()) {
             for (Neuron neuron2 : layer2.getNeurons()) {
-                edges.add(new Edge(neuron, neuron2, new Random().nextDouble() - 0.5));
+                edges.add(new Edge(neuron, neuron2, 1 - 2 * new Random().nextDouble()));
             }
         }
 
         for (Neuron neuron : layer2.getNeurons()) {
             for (Neuron neuron2 : layer3.getNeurons()) {
-                edges.add(new Edge(neuron, neuron2, new Random().nextDouble() - 0.5));
+                edges.add(new Edge(neuron, neuron2, 1 - 2 * new Random().nextDouble()));
             }
         }
 
@@ -53,7 +53,7 @@ public class Main {
         );
 
         for (int i = 0; i < epochs; i++) {
-            NeuralNetworkUtils.train(neuronalNetwork, instances);
+            NeuralNetworkUtils.train(neuronalNetwork, instances, learningRate);
         }
 
         int numberOfErrors = 0;
@@ -61,7 +61,7 @@ public class Main {
             Double predicted = NeuralNetworkUtils.predict(neuronalNetwork, instance);
             System.out.printf("(%f, %f) = %f%n", instance.getInput1(), instance.getInput2(), predicted);
 
-            Double predictedValue = predicted < 0.5 ? 0d : 1d;
+            Double predictedValue = predicted < 0.45 ? 0d : 1d;
             if (!predictedValue.equals(instance.getOutput())) {
                 numberOfErrors++;
             }

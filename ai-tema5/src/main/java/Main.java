@@ -1,6 +1,5 @@
 import ai.tema5.utils.ParserUtils;
 import ai.tema5.utils.ReaderUtil;
-import ai.tema5.utils.StringUtils;
 import org.eclipse.rdf4j.model.Statement;
 
 import java.util.List;
@@ -22,6 +21,6 @@ public class Main {
         ParserUtils.findTwoNounsWithVerbBetween(ReaderUtil.readNLPDocumentFromFile(DOCUMENT_PATH));
 
         //EX. 4
-        ParserUtils.findSentencesWithOntology(ontologies,readSentencesFromFile(OUTPUT_DOCUMENT));
+        ParserUtils.findSentencesWithOntology(ontologies, readSentencesFromFile(OUTPUT_DOCUMENT));
     }
 }

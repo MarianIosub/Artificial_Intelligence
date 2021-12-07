@@ -17,7 +17,7 @@ import static ai.tema5.utils.StringUtils.OUTPUT_DOCUMENT_2;
 
 public class ParserUtils {
     public static void findByEntityAndRelation(List<Statement> statements, String relation, String entity) {
-        System.out.println("Relatiile care contin 'superTopicOf' si entitatatea "+entity+" sunt:\n\n");
+        System.out.println("Relatiile care contin 'superTopicOf' si entitatatea " + entity + " sunt:\n\n");
         for (Statement statement : statements) {
             if ((statement.getObject().toString().contains(entity) || statement.getSubject().toString().contains(entity))
                     && statement.getPredicate().toString().contains(relation)) {

@@ -22,7 +22,7 @@ class PairStateAction {
 @Setter
 public class RewardTable {
     private final int n = 4; // Numarul de linii = coloane
-    private Map<PairStateAction, Double> table;
+    private Map<PairStateAction, Double> table;git
 
     private Double randomNumber() {
         return new Random().nextDouble();
